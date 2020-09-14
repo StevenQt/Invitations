@@ -1,5 +1,4 @@
 $(document).ready(function() {
-    //ip6  375-603
     var sceneWidth = $(window).width();
     var sceneHeight = $(window).height();
     var ratio = sceneWidth/sceneHeight;
@@ -12,32 +11,29 @@ $(document).ready(function() {
 
     $("body").css({width : sceneWidth, height : sceneHeight});
 
-    $(".swiper-container,.swiper-slide,#loading").css({width : sceneWidth, height : sceneHeight, overflow: "hidden"});
+    $(".swiper-container,.swiper-slide").css({width : sceneWidth, height : sceneHeight, overflow: "hidden"});
 
     window.onload = function() {
         $.html5Loader({
-            filesToLoad:    './h5load.json', // this could be a JSON or simply a javascript object
-            onBeforeLoad:       function () {},
-            onComplete:         function () {
-
+            filesToLoad: './config.json', 
+            onBeforeLoad: function () {},
+            onComplete: function () {
                 oAudio.play();
-                tm1.seek(0).pause();
-                $("#loading").fadeOut();
+                tm1.seek(0).pause();             
                 tm1.restart();
             },
-            onElementLoaded:    function ( obj, elm) { },
-            onUpdate:           function ( percentage ) {
+            onElementLoaded: function (obj, elm) { },
+            onUpdate: function (percentage) {
                 console.log(percentage)
             }
-        });
-        var i;
+        });        
 
         var mainSwiper = new Swiper( '.swiper-container', {
             direction: 'vertical',
-            loop:false,
-            longSwipesRatio : 0.1,
-            speed:200,
-            nextButton:'.slideDown',
+            loop: false,
+            longSwipesRatio: 0.1,
+            speed: 200,
+            nextButton: '.slideDown',
             pagination: '.swiper-pagination',
             onSlideChangeEnd: function(swiper){
                 tm1.seek(0).pause();
@@ -47,7 +43,7 @@ $(document).ready(function() {
                 tm5.seek(0).pause();
                 tm6.seek(0).pause();
                 tm7.seek(0).pause();
-                i = mainSwiper.activeIndex + 1;
+                var i = mainSwiper.activeIndex + 1;
                 if(i == 1){ tm1.restart()}
                 if(i == 2){ tm2.restart()}
                 if(i == 3){ tm3.restart()}
@@ -62,9 +58,9 @@ $(document).ready(function() {
 
         var cellSwiper = new Swiper('.page_5',{
             direction : 'horizontal',
-            loop:true,
-            speed:200,
-            autoplay: 3000,
+            loop: true,
+            speed: 200,
+            autoplay: 2000,
             longSwipesRatio : 0.1,
             prevButton:'.slide_l',
             nextButton:'.slide_r',
@@ -72,7 +68,7 @@ $(document).ready(function() {
         {
 
             var tm1 = new TimelineMax()
-                .fromTo(".page_1 .picture>img", 3, {marginTop: 0}, {marginTop: 0}, 0)
+                .fromTo(".page_1 .picture>img", 3, {marginTop: 0}, {marginTop: -60}, 0)
                 .fromTo(".page_1 .frame", 3, {autoAlpha: 0, scale: 0}, {autoAlpha: 1, scale: 1, ease: Back.easeOut}, 0)
                 .fromTo(".page_1 .hearts>img", 3, {autoAlpha: 0, scale: 0}, {
                     autoAlpha: 1,
@@ -145,11 +141,9 @@ $(document).ready(function() {
             $("#markBox").toggle();
         })
 
-        //handleFrom
         var name,tel,num,position,text;
         var oName,oTel,oNum,oPosition,oRight;
         var f_name = $('.f_name'),f_phone = $('.f_phone'),f_num = $('.f_num'),f_position = $('.f_position'),f_text = $('.f_text');
-        // 表单
         function check() {
             name  = f_name.val();
             oName = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
@@ -160,7 +154,6 @@ $(document).ready(function() {
             position   = f_position.val();
             oPosition = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
             text = f_text.val();
-            // oText = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
             oRight=0;
             if( oName.test(name) && name!=""            ){ oSuccess(f_name    ); oRight++ }else { oWaring(f_name) }
             if(oTel.test(tel) && tel!=""                ){ oSuccess(f_phone   ); oRight++ }else { oWaring( f_phone ) }
@@ -177,7 +170,7 @@ $(document).ready(function() {
             if(oRight === 5){
                     $.ajax({
                         type: "post",
-                        url: "./root/insertApi.php",
+                        url: "./root/insert.php",
                         data: {"f_name":name,"f_phone":tel,"f_num":num,"f_position":position,"f_text":text},
                         success: function (json) {
                             console.log(json)
@@ -185,7 +178,7 @@ $(document).ready(function() {
                             $(".submit").unbind();
                         },
                         error: function (json) {
-                            alert('未知错误！')
+                            alert("您的信息我们已经收到，谢谢！")
                         }
                     });
                 $(".submit").css({'background-color': 'aquamarine' })
@@ -196,7 +189,7 @@ $(document).ready(function() {
             if (bless == false){
                 $.ajax({
                     type: "post",
-                    url: "./root/blessApi.php",
+                    url: "./root/bless.php",
                     data: {test:true},
                     success:function (json) {
                         console.log(json);
@@ -205,16 +198,16 @@ $(document).ready(function() {
                     },
                     error: function (json) {
                         console.log(json)
-                        alert("请刷新页面再来一次！")
+                        alert("谢谢您！")
                     }
                 });
             }else {
                 alert("谢谢您，您已经为我们点过赞了！")
             }
         });
-        // 音乐
+
         var isPlay = true;
-        var oAudio = $("#Audio")[0];
+        var oAudio = $("#oAudio")[0];
         $(".music").click(function () {
             if (isPlay == true  ){
                 oAudio.pause();

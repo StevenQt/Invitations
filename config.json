@@ -51,7 +51,7 @@
     },
     {
       "type":"IMAGE",
-      "source":"./img/s1.jpg",
+      "source":"./img/p1.jpg",
       "size":161
     },
     {
@@ -116,7 +116,7 @@
     },
     {
       "type":"IMAGE",
-      "source":"./img/westory.png",
+      "source":"./img/story.png",
       "size":10
     }
   ]

@@ -6,7 +6,6 @@ if ($_POST) {
     insertOne();
 }
 function initDate(){
-    //获取用户 ip + 代理 + 时间
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         $ip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -23,18 +22,16 @@ function initDate(){
 function insertOne(){
     $Date = initDate();
     $mysqli = initConnect();
-    // 预处理方式插入单行数据
     $keys =  array(); $values = array();
     foreach ($Date as $key => $value) {
         $keys[] = "`".$key."`";
         $values[] = $value;
     }
     $str_keys = implode(',', $keys);
-   $str_values = implode(',', $values);
+    $str_values = implode(',', $values);
 
     $query = "INSERT INTO ".DB_TABLE." (".$str_keys.") VALUES(?,?,?,?,?,?,?,?)";
     if($statement = $mysqli->prepare($query)){
-        //bind parameters for markers, where (s = string|datetime, i = integer, d = double,  b = blob)
         $statement->bind_param('ssisssss',$values[0], $values[1], $values[2], $values[3], $values[4], $values[5], $values[6], $values[7] );
     }else{
         print 'Error : ('. $mysqli->error .') ';

@@ -7,21 +7,15 @@
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="lib/swiper.min.css">
 </head>
-<body>
-    <div id="loading">
-        <div class="spinner">
-            <div class="rect1"></div>
-            <div class="rect2"></div>
-            <div class="rect3"></div>
-            <div class="rect4"></div>
-            <div class="rect5"></div>
-        </div>
-    </div> 
-
-    <audio id="Audio" src="img/try.mp3" type="audio/mpeg" autoplay="autoplay" loop="loop"></audio>
+<body>	
+    <div id="markBox"><img src="img/map.png" alt="地图"></div>
+    <div class="map"><span class="rotation"></span><p>路线</p></div>
+    <div class="bless"><span class="rotation"></span><p>点赞</p></div>
+	
+    <audio id="oAudio" src="img/try.mp3" type="audio/mpeg" autoplay="autoplay" loop="loop"></audio>
 
     <div class="music rotation"><img src="img/music.png" alt="音乐开关"></div>
-    <div class="slideDown"><img src="img/slidedown.png" alt="下滑页面提示"></div>
+    <div class="slideDown"><img src="img/slidedown.png" alt="下滑箭头"></div>
 
     <div class="swiper-container">
         <div class="swiper-wrapper">
@@ -40,8 +34,8 @@
                 </div>
                 <div class="frame"><img src="img/frame.png" alt="相框"></div>
                 <div class="name">
-                    <p id="name">李书鹏♥李绍丽</p>
-                    <p id="marry" style="font-size: 12px">W E A R E M A R R I E D</p>
+                    <p id="name" style="font-size: 20px">李书鹏♥李绍丽</p>
+                    <p id="marry" style="font-size: 20px">WE ARE MARRIED</p>
                 </div>
             </div>
             <div class="swiper-slide page_2">
@@ -56,11 +50,11 @@
                 <div class="hearts_1"><img src="img/heart.png" alt="心"></div>
                 <div class="hearts_2"><img src="img/heart.png" alt="心"></div>
                 <div class="info">
-                    <p>我们真诚相邀</p>
-                    <p><span>2020.10.4&nbsp;&nbsp;11:38</span></p>
-                    <p><span>农历十月十八·星期日</span></p>
-                    <p>红韵山庄</p>
-                    <p>地址：红安县杏花乡郭受九新村</p>
+                    <p style="font-size: 20px">我们真诚相邀</p>
+                    <p style="font-size: 20px"><span>2020.10.4&nbsp;&nbsp;12:08</span></p>
+                    <p style="font-size: 20px"><span>农历八月十八·星期日</span></p>
+                    <p style="font-size: 20px">红韵山庄</p>
+                    <p style="font-size: 20px">地址：红安县杏花乡郭受九新村</p>
                 </div>
             </div>
             <div class="swiper-slide page_3">
@@ -71,10 +65,10 @@
                 <div class="info">
                     <div class="smallBar_1"></div>
                     <div class="smallBar_2"></div>
-                    <div class="info_t1">曾经的我们</div>
-                    <div class="info_t2">互不相交的平行线</div>
+                    <div class="info_t1" style="font-size: 20px">曾经的我们</div>
+                    <div class="info_t2" style="font-size: 20px">互不相交的平行线</div>
                 </div>
-                <div class="bottom_pic"><img src="img/p4-s2.jpg" alt="brother-in-law"></div>
+                <div class="bottom_pic"><img src="img/p4-s2.jpg" alt="lily"></div>
             </div>
             <div class="swiper-slide page_5">
                 <div class="swiper-wrapper">
@@ -85,7 +79,7 @@
                     <div class="swiper-slide p5_p5"><img src="img/p5-s5.jpg" alt="lily"></div>
                     <div class="swiper-slide p5_p6"><img src="img/p5-s6.jpg" alt="lily"></div>               
                 </div>
-                <div class="info"><img src="img/westory.png" alt="我们的故事"></div>
+                <div class="info"><img src="img/story.png" alt="我们的故事"></div>
                 <div class="slide_r"><img src="./img/slidedown.png" alt="右滑动"></div>
                 <div class="slide_l"><img src="./img/slidedown.png" alt="左滑动"></div>
             </div>
@@ -96,11 +90,11 @@
                 <div class="p6-info">
                     <p class="l">LOVE</p>
                     <span></span>
-                    <p class="y">缘分让我们走到一起</p>
+                    <p class="y"style="font-size: 20px">缘分让我们走到一起</p>
                 </div>
                 <div class="p6_bless">
-                    <p class="b1">如今我们将步入<span>婚姻</span>的殿堂！</p>
-                    <p class="b2">我们的幸福希望有你<span>见证</span>！</p>
+                    <p class="b1" style="font-size: 20px">如今我们将步入<span>婚姻</span>的殿堂！</p>
+                    <p class="b2" style="font-size: 20px">我们的幸福希望有你<span>见证</span>！</p>
                 </div>
             </div>
             <div class="swiper-slide page_7">
@@ -126,9 +120,8 @@
     <script src="lib/jquery.html5Loader.min.js"></script>
     <script src="lib/swiper.jquery.min.js"></script>
     <script src="lib/TweenMax.min.js"></script>
-
     <script src="index.js"></script>
-    <!--------------BAIDU---------------->
+
     <script>
         var _hmt = _hmt || [];
         (function() {
@@ -138,6 +131,5 @@
             s.parentNode.insertBefore(hm, s);
         })();
     </script>
-    <!--------------BAIDU---------------->
 </body>
 </html>

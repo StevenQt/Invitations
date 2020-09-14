@@ -41,11 +41,8 @@
                 print '<td>'.$row["f_time"].'</td>';
                 print '</tr>';
             }
-
-            // Frees the memory associated with a result
+			
             $results->free();
-
-            // close connection
             $mysqli->close();
             ?>
             </tbody>

@@ -2,13 +2,11 @@
 require_once 'check.php';
 require_once 'connect.php';
 
-
 if ($_POST) {
     insertBless();
 }
 
 function initDate(){
-    //获取用户 ip + 代理 + 时间
     if (!empty($_SERVER['HTTP_CLIENT_IP'])) {
         $ip = $_SERVER['HTTP_CLIENT_IP'];
     } elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR'])) {
@@ -23,10 +21,10 @@ function initDate(){
     $Date['g_hash'] = md5(uniqid(rand(), true));
     return $Date;
 }
+
 function insertBless(){
     $Date = initDate();
     $mysqli = initConnect();
-    // 预处理方式插入单行数据
     $keys =  array(); $values = array();
     foreach ($Date as $key => $value) {
         $keys[] = "`".$key."`";
@@ -41,11 +39,8 @@ function insertBless(){
     }else{ print 'Error : ('. $mysqli->error .') '; }
 
     if($statement->execute()){
-        // 查询当前点赞的人数
         mysqli_query($mysqli,"SELECT * FROM bless");
         $allRank = mysqli_affected_rows($mysqli);
-
-        // 该用户点赞的次数
         mysqli_query($mysqli,"SELECT * FROM bless WHERE g_ip ='".$Date['g_ip']."'");
         $selfRank = mysqli_affected_rows($mysqli);
 
@@ -61,7 +56,7 @@ function insertBless(){
     } else{
         print ('Error : '. $mysqli->error);
     }
-
+	
     $statement->close();
     $mysqli->close();
 }
