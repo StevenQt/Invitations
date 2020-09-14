@@ -214,7 +214,7 @@ $(document).ready(function() {
         });
         // 音乐
         var isPlay = true;
-        var oAudio = $("#oAudio")[0];
+        var oAudio = $("#Audio")[0];
         $(".music").click(function () {
             if (isPlay == true  ){
                 oAudio.pause();
