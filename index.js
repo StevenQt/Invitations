@@ -72,7 +72,7 @@ $(document).ready(function() {
         {
 
             var tm1 = new TimelineMax()
-                .fromTo(".page_1 .picture>img", 3, {marginTop: 0}, {marginTop: -60}, 0)
+                .fromTo(".page_1 .picture>img", 3, {marginTop: 0}, {marginTop: 0}, 0)
                 .fromTo(".page_1 .frame", 3, {autoAlpha: 0, scale: 0}, {autoAlpha: 1, scale: 1, ease: Back.easeOut}, 0)
                 .fromTo(".page_1 .hearts>img", 3, {autoAlpha: 0, scale: 0}, {
                     autoAlpha: 1,
