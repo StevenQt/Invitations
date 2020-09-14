@@ -51,17 +51,17 @@
     },
     {
       "type":"IMAGE",
-      "source":"./img/index-s1.jpg",
+      "source":"./img/s1.jpg",
       "size":161
     },
     {
       "type":"IMAGE",
-      "source":"./img/lineBar-1.png",
+      "source":"./img/linebar-1.png",
       "size":4
     },
     {
       "type":"IMAGE",
-      "source":"./img/lineBar-1.png",
+      "source":"./img/linebar-1.png",
       "size":2
     },
     {
@@ -81,12 +81,12 @@
     },
     {
       "type":"IMAGE",
-      "source":"./img/p2-s1.jpg",
+      "source":"./img/p2.jpg",
       "size":31
     },
     {
       "type":"IMAGE",
-      "source":"./img/p3-s1.jpg",
+      "source":"./img/p3.jpg",
       "size":130
     },
     {
@@ -96,7 +96,7 @@
     },
     {
       "type":"IMAGE",
-      "source":"./img/p4-s11.jpg",
+      "source":"./img/p4-s1.jpg",
       "size":93
     },
     {
@@ -111,12 +111,12 @@
     },
     {
       "type":"IMAGE",
-      "source":"./img/slideDown.png",
+      "source":"./img/slidedown.png",
       "size":1
     },
     {
       "type":"IMAGE",
-      "source":"./img/weStory.png",
+      "source":"./img/westory.png",
       "size":10
     }
   ]
