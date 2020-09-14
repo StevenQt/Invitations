@@ -1,32 +1,32 @@
 $(document).ready(function() {
-    var sceneWidth = $(window).width();
-    var sceneHeight = $(window).height();
-    var ratio = sceneWidth/sceneHeight;
+    var screenWidth = $(window).width();
+    var screenHeight = $(window).height();
+    var ratio = screenWidth/screenHeight;
 
     if(ratio > (375/603)){
-        sceneWidth = sceneHeight * (375/603);
+        screenWidth = screenHeight * (375/603);
     }else {
-        sceneHeight = sceneWidth * (603/375 );
+        screenHeight = screenWidth * (603/375 );
     }
 
-    $("body").css({width : sceneWidth, height : sceneHeight});
+    $("body").css({width : screenWidth, height : screenHeight});
 
-    $(".swiper-container,.swiper-slide").css({width : sceneWidth, height : sceneHeight, overflow: "hidden"});
+    $(".swiper-container,.swiper-slide").css({width : screenWidth, height : screenHeight, overflow: "hidden"});
 
     window.onload = function() {
         $.html5Loader({
-            filesToLoad: './config.json', 
+            filesToLoad: './config.json',
             onBeforeLoad: function () {},
             onComplete: function () {
                 oAudio.play();
-                tm1.seek(0).pause();             
+                tm1.seek(0).pause();           
                 tm1.restart();
             },
             onElementLoaded: function (obj, elm) { },
             onUpdate: function (percentage) {
                 console.log(percentage)
             }
-        });        
+        });      
 
         var mainSwiper = new Swiper( '.swiper-container', {
             direction: 'vertical',
@@ -155,7 +155,7 @@ $(document).ready(function() {
             oPosition = /[\u4E00-\u9FA5\uF900-\uFA2D]/;
             text = f_text.val();
             oRight=0;
-            if( oName.test(name) && name!=""            ){ oSuccess(f_name    ); oRight++ }else { oWaring(f_name) }
+            if(oName.test(name) && name!=""            ){ oSuccess(f_name    ); oRight++ }else { oWaring(f_name) }
             if(oTel.test(tel) && tel!=""                ){ oSuccess(f_phone   ); oRight++ }else { oWaring( f_phone ) }
             if(oNum.test(num) && num != ""              ){ oSuccess(f_num     ); oRight++ }else { oWaring(f_num) }
             if(oPosition.test(position) && position !=""){ oSuccess(f_position); oRight++ }else { oWaring(f_position) }
