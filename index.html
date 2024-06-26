@@ -1,135 +1,76 @@
-<!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>我们结婚了</title>
-    <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="lib/swiper.min.css">
+    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
+    <title>mpegts.js demo</title>
 </head>
-<body>		
-    <div id="markBox"><img src="img/map.png" alt="地图"></div>
-    <div class="map"><span class="rotation"></span><p>路线</p></div>
-    <div class="bless"><span class="rotation"></span><p>点赞</p></div>
-	
-    <audio id="oAudio" src="img/try.mp3" type="audio/mpeg" autoplay="autoplay" loop="loop"></audio>
-
-    <div class="music rotation"><img src="img/music.png" alt="音乐开关"></div>
-    <div class="slideDown"><img src="img/slidedown.png" alt="下滑箭头"></div>
-
-    <div class="swiper-container">
-        <div class="swiper-wrapper">
-            <div class="swiper-slide page_1">
-                <div class="picture"><img src="img/p1.jpg" alt="lily"></div>
-                <div class="shadow"><img src="img/shadow.png" alt="阴影"></div>
-                <div class="hearts">
-                    <img src="img/hearts.png" alt="好多心">
-                    <ul>
-                        <li class="li_1"><img src="img/heart.png" alt="♥"></li>
-                        <li class="li_2"><img src="img/heart.png" alt="♥"></li>
-                        <li class="li_3"><img src="img/heart.png" alt="♥"></li>
-                        <li class="li_4"><img src="img/heart.png" alt="♥"></li>
-                        <li class="li_5"><img src="img/heart.png" alt="♥"></li>
-                    </ul>
-                </div>
-                <div class="frame"><img src="img/frame.png" alt="相框"></div>
-                <div class="name">
-                    <p id="name" style="font-size: 20px">李书鹏♥李绍丽</p>
-                    <p id="marry" style="font-size: 20px">WE ARE MARRIED</p>
+<body>
+    <div class="mainContainer">
+        <div>
+            <div id="mediaSourceURL" class="hidden">
+                <div class="url-input">
+                    <label for="msURL">MediaSource:</label>
+                    <input id="msURL" type="text" value="audio/test.ts" />
                 </div>
             </div>
-            <div class="swiper-slide page_2">
-                <div class="bg"><img src="img/index-bg.jpg" alt="背景"></div>
-                <div class="flower"><img src="img/flower.png" alt="鲜花"></div>
-                <div class="head_frame">
-                    <span><img src="img/p2.jpg" alt="照片"></span>
-                </div>
-                <div class="linebar_1"><img src="img/linebar-1.png" alt="花纹条"></div>
-                <div class="linebar_2"><img src="img/linebar-2.png" alt="花纹条"></div>
-
-                <div class="hearts_1"><img src="img/heart.png" alt="心"></div>
-                <div class="hearts_2"><img src="img/heart.png" alt="心"></div>
-                <div class="info">
-                    <p style="font-size: 16px">我们真诚相邀</p>
-                    <p style="font-size: 16px"><span>2020.10.4&nbsp;&nbsp;12:08</span></p>
-                    <p style="font-size: 16px"><span>农历八月十八·星期日</span></p>
-                    <p style="font-size: 16px">红韵山庄</p>
-                    <p style="font-size: 16px">地址：红安县杏花乡郭受九村</p>
-                </div>
+        </div>
+        <div class="video-container">
+            <div>
+                <video name="videoElement" class="centeredVideo" controls autoplay>
+                    Your browser is too old which doesn't support HTML5 video.
+                </video>
             </div>
-            <div class="swiper-slide page_3">
-                <div class="bg"><img src="img/p3.jpg" alt="lily"></div>
-            </div>
-            <div class="swiper-slide page_4">
-                <div class="top_pic"><img src="img/p4-s1.jpg" alt="lily"></div>
-                <div class="info">
-                    <div class="smallBar_1"></div>
-                    <div class="smallBar_2"></div>
-                    <div class="info_t1" style="font-size: 20px">曾经的我们</div>
-                    <div class="info_t2" style="font-size: 20px">互不相交的平行线</div>
-                </div>
-                <div class="bottom_pic"><img src="img/p4-s2.jpg" alt="lily"></div>
-            </div>
-            <div class="swiper-slide page_5">
-                <div class="swiper-wrapper">
-                    <div class="swiper-slide p5_p1"><img src="img/p5-s1.jpg" alt="lily"></div>
-                    <div class="swiper-slide p5_p2"><img src="img/p5-s2.jpg" alt="lily"></div>
-                    <div class="swiper-slide p5_p3"><img src="img/p5-s3.jpg" alt="lily"></div>
-                    <div class="swiper-slide p5_p4"><img src="img/p5-s4.jpg" alt="lily"></div>
-                    <div class="swiper-slide p5_p5"><img src="img/p5-s5.jpg" alt="lily"></div>
-                    <div class="swiper-slide p5_p6"><img src="img/p5-s6.jpg" alt="lily"></div>               
-                </div>
-                <div class="info"><img src="img/story.png" alt="我们的故事"></div>
-                <div class="slide_r"><img src="./img/slidedown.png" alt="右滑动"></div>
-                <div class="slide_l"><img src="./img/slidedown.png" alt="左滑动"></div>
-            </div>
-            <div class="swiper-slide page_6">
-                <div class="p6_s1"><img src="img/p6.jpg" alt="lily"></div>
-                <div class="p6_frame"><img src="img/frame1.png" alt="相框"></div>
-                <div class="p6_love"><img src="img/LOVE.png" alt="love you"></div>
-                <div class="p6-info">
-                    <p class="l">LOVE</p>
-                    <span></span>
-                    <p class="y"style="font-size: 20px">缘分让我们走到一起</p>
-                </div>
-                <div class="p6_bless">
-                    <p class="b1" style="font-size: 20px">如今我们将步入<span>婚姻</span>的殿堂！</p>
-                    <p class="b2" style="font-size: 20px">我们的幸福希望有你<span>见证</span>！</p>
-                </div>
-            </div>
-            <div class="swiper-slide page_7">
-                <div class="bg"><img src="img/index-bg.jpg" alt="背景"></div>
-                <div class="p7_s1"><img src="img/p7.jpg" alt="lover"></div>
-                <input class="f_name" type="text" name="name" placeholder="姓名">
-                <input class="f_phone" type="tel" name="phone" placeholder="手机号">
-                <input class="f_num" type="number" name="num" placeholder="人数">
-                <input class="f_position" type="text" name="position" placeholder="男方/女方亲友">
-                <textarea rows="3" class="f_text" placeholder="祝福留言" name="notes"></textarea>
-                <div class="submit" onclick="_hmt.push(['_trackEvent', 'submit', 'click', 'sister'])">发送信息</div>
-                <a href="tel:136 3265 1347" phone="136 3265 1347">
-                    <div class="call_g"><img src="img/call-g.png" alt="call 新娘"></div>
-                </a>
-                <a href="tel:131 6339 8622" phone="131 6339 8622">
-                    <div class="call_b"><img src="img/call-b.png" alt="call 新郎"></div>
-                </a>
-            </div>            
+        </div>
+        <div class="controls">
+            <button onclick="player_load()">Load</button>
+            <button onclick="player_start()">Start</button>
+            <button onclick="player_pause()">Pause</button>
+            <button onclick="player_destroy()">Destroy</button>
         </div>
     </div>
-
-    <script src="lib/jquery-1.9.min.js"></script>
-    <script src="lib/jquery.html5Loader.min.js"></script>
-    <script src="lib/swiper.jquery.min.js"></script>
-    <script src="lib/TweenMax.min.js"></script>
-    <script src="index.js"></script>
-
+    <script src="mpegts.js"></script>
     <script>
-        var _hmt = _hmt || [];
-        (function() {
-            var hm = document.createElement("script");
-            hm.src = "//hm.baidu.com/hm.js?8acc9ac28ac58c4713575a077d7fe011";
-            var s = document.getElementsByTagName("script")[0];
-            s.parentNode.insertBefore(hm, s);
-        })();
+        function player_load() {
+            var element = document.getElementsByName('videoElement')[0];
+            if (typeof player !== "undefined") {
+                if (player != null) {
+                    player.unload();
+                    player.detachMediaElement();
+                    player.destroy();
+                    player = null;
+                }
+            }
+            var mediaDataSource = {
+                url: 'http://devimages.apple.com/iphone/samples/bipbop/bipbopall.m3u8',
+                type: 'mse'
+            };
+            player = mpegts.createPlayer(mediaDataSource, {
+                enableWorker: true,
+                lazyLoadMaxDuration: 3 * 60,
+                seekType: 'range',
+                liveBufferLatencyChasing: false,
+            });
+            player.attachMediaElement(element);
+            player.load();
+        }
+        function player_start() {
+            if (player != null) {
+               player.play();
+            }
+        }
+        function player_pause() {
+            if (player != null) {
+                player.pause();
+            }
+        }
+        function player_destroy() {
+            if (player != null) {
+                player.pause();
+                player.unload();
+                player.detachMediaElement();
+                player.destroy();
+                player = null;
+            }
+        }
     </script>
 </body>
 </html>
