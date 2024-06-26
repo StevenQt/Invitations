@@ -39,8 +39,10 @@
                     player = null;
                 }
             }
+            var url = document.getElementById('msURL').value;
+            console.log(url);
             var mediaDataSource = {
-                url: 'https://xs-im-test.oss-cn-hangzhou.aliyuncs.com/bbrtc/records/room10086_room10086_uid_s_4306_uid_e_audio_20240112144357.ts',
+                url: url,
                 type: 'mse'
             };
             player = mpegts.createPlayer(mediaDataSource, {
