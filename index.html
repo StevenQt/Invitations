@@ -1,56 +1,151 @@
 <!DOCTYPE html>
-<html>
+<html lang="zh-CN" data-bs-theme="dark">
+
 <head>
     <meta charset=utf-8 />
-    <title>hls player</title>
+    <title>Online Player</title>
 </head>
+
 <body>
-    <div class="mainContainer">
-        <div>
-            <div id="mediaSourceURL" class="hidden">
-                <div class="url-input">
-                    <label for="msURL">MediaSource:</label>
-                    <input id="msURL" type="text" value="https://rtc-hz-dev.oss-cn-hangzhou.aliyuncs.com/records/collect/test.m3u8" />
-                </div>
-            </div>
+    <style>
+        body,
+        html {
+            height: 100%;
+        }
+
+        body {
+            background-color: #3d5ba1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .main-container {
+            text-align: center;
+            width: 1080px;
+            height: 810px;
+        }
+
+        .title-container {
+            color: white;
+            font-size: 24px;
+        }
+
+        .video-container {
+            width: 1080px;
+            height: 720px;
+            overflow: hidden;
+            margin-top: 10px;
+        }
+
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            object-fit: fill;
+        }
+
+        .input-container {
+            position: relative;
+            height: 30px;
+            width: 100%;
+            box-sizing: border-box;
+            margin-top: 10px;
+        }
+
+        .input-container input-box {
+            height: 30px;
+            width: calc(100% - 70px);
+            box-sizing: border-box;
+            float: left;
+        }
+
+        .input-box input {
+            display: block;
+            background-color: black;
+            color: #0a6e63;
+            font-size: 20px;
+            height: 30px;
+            width: 1009px;
+            border: none;
+            padding-left: 10px;
+            box-sizing: border-box;
+            border-radius: 5px 0px 0px 5px;
+        }
+
+        .input-container button {
+            background-color: black;
+            color: #2d70f4;
+            font-size: 20px;
+            height: 30px;
+            width: 70px;
+            position: absolute;
+            top: 0px;
+            right: 0px;
+            text-align: center;
+            cursor: pointer;
+            border: none;
+            border-radius: 0px 5px 5px 0px;
+        }
+
+        .input-container button:hover {
+            background-color: grey;
+            border: none;
+        }
+    </style>
+    <div class="main-container">
+        <div class="title-container">
+            <div id="title" class="hidden">Online Player</div>
         </div>
         <div class="video-container">
-            <div>
-                <video name="videoElement" class="centeredVideo" controls autoplay>
-                    Your browser is too old which doesn't support HTML5 video.
-                </video>
-            </div>
+            <video name="videoElement" controls></video>
         </div>
-        <div class="controls">
-            <button onclick="player_load()">Load</button>
-            <button onclick="player_start()">Start</button>
-            <button onclick="player_pause()">Pause</button>
+        <div class="input-container">
+            <div class="input-box">
+                <input id="url" type="text" placeholder="https://test-streams.mux.dev/x36xhzz/x36xhzz.m3u8" value=""
+                    onfocus="input_focus()" />
+            </div>
+            <button onclick="player_load()">PLAY</button>
         </div>
     </div>
+
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
     <script>
         var video = document.getElementsByName('videoElement')[0];
+        var tip = '媒体文件网络地址';
+        function input_focus() {
+            document.getElementById('url').setAttribute('placeholder', tip)
+        }
         function player_load() {
             if (Hls.isSupported()) {
                 var hls = new Hls();
                 hls.attachMedia(video);
                 hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-                    console.log('video and hls.js are now bound together');
-                    var url = document.getElementById('msURL').value;
+                    var url = document.getElementById('url').value;
+                    console.log('value url:' + url);
+                    if (url == '') {
+                        url = document.getElementById('url').getAttribute('placeholder')
+                        console.log('placeholder url:' + url);
+                    }
+                    if (url == '' || url == tip) {
+                        console.log('input url empty');
+                        return;
+                    }
                     hls.loadSource(url);
                     hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
                         console.log(data.levels.length + ' quality level');
                     });
+                    video.play();
+                    console.log('player load');
                 });
                 hls.on(Hls.Events.ERROR, function (event, data) {
                     if (data.fatal) {
                         switch (data.type) {
                             case Hls.ErrorTypes.NETWORK_ERROR:
-                                console.log('network error encountered, try to recover');
+                                console.log('network error');
                                 hls.startLoad();
                                 break;
                             case Hls.ErrorTypes.MEDIA_ERROR:
-                                console.log('media error encountered, try to recover');
+                                console.log('media error');
                                 hls.recoverMediaError();
                                 break;
                             default:
@@ -60,16 +155,8 @@
                     }
                 });
             }
-            console.log('player load');
-        }
-        function player_start() {
-            video.play();
-            console.log('player play');
-        }
-        function player_pause() {
-            video.pause();
-            console.log('player pause');
         }
     </script>
 </body>
+
 </html>
