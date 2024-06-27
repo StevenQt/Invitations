@@ -1,53 +1,75 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset=utf-8 />
-    <title>hls</title>
+    <title>hls player</title>
 </head>
-
 <body>
-    <h1>hls.js Example Embed</h1>
+    <div class="mainContainer">
+        <div>
+            <div id="mediaSourceURL" class="hidden">
+                <div class="url-input">
+                    <label for="msURL">MediaSource:</label>
+                    <input id="msURL" type="text" value="https://rtc-hz-dev.oss-cn-hangzhou.aliyuncs.com/records/collect/test.m3u8" />
+                </div>
+            </div>
+        </div>
+        <div class="video-container">
+            <div>
+                <video name="videoElement" class="centeredVideo" controls autoplay>
+                    Your browser is too old which doesn't support HTML5 video.
+                </video>
+            </div>
+        </div>
+        <div class="controls">
+            <button onclick="player_load()">Load</button>
+            <button onclick="player_start()">Start</button>
+            <button onclick="player_pause()">Pause</button>
+        </div>
+    </div>
     <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
-    <video id="video" class="centeredVideo" controls autoplay="false">
-        Your browser is too old which doesn't support HTML5 video.
-    </video>
     <script>
-        document.addEventListener('click', function () {
-            var video = document.getElementById('video');
-            video.play();
-            console.log('video play');
-        });
-        if (Hls.isSupported()) {
-            var video = document.getElementById('video');
-            var hls = new Hls();
-            hls.attachMedia(video);
-            hls.on(Hls.Events.MEDIA_ATTACHED, function () {
-                console.log('video and hls.js are now bound together');
-                hls.loadSource('https://rtc-hz-dev.oss-cn-hangzhou.aliyuncs.com/records/collect/test_0.m3u8');
-                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
-                    console.log(data.levels.length + ' quality level');
+        var video = document.getElementsByName('videoElement')[0];
+        function player_load() {
+            if (Hls.isSupported()) {
+                var hls = new Hls();
+                hls.attachMedia(video);
+                hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                    console.log('video and hls.js are now bound together');
+                    var url = document.getElementById('msURL').value;
+                    hls.loadSource(url);
+                    hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                        console.log(data.levels.length + ' quality level');
+                    });
                 });
-            });
-            hls.on(Hls.Events.ERROR, function (event, data) {
-                if (data.fatal) {
-                    switch (data.type) {
-                        case Hls.ErrorTypes.NETWORK_ERROR:
-                            console.log('network error encountered, try to recover');
-                            hls.startLoad();
-                            break;
-                        case Hls.ErrorTypes.MEDIA_ERROR:
-                            console.log('media error encountered, try to recover');
-                            hls.recoverMediaError();
-                            break;
-                        default:
-                            hls.destroy();
-                            break;
+                hls.on(Hls.Events.ERROR, function (event, data) {
+                    if (data.fatal) {
+                        switch (data.type) {
+                            case Hls.ErrorTypes.NETWORK_ERROR:
+                                console.log('network error encountered, try to recover');
+                                hls.startLoad();
+                                break;
+                            case Hls.ErrorTypes.MEDIA_ERROR:
+                                console.log('media error encountered, try to recover');
+                                hls.recoverMediaError();
+                                break;
+                            default:
+                                hls.destroy();
+                                break;
+                        }
                     }
-                }
-            });
+                });
+            }
+            console.log('player load');
+        }
+        function player_start() {
+            video.play();
+            console.log('player play');
+        }
+        function player_pause() {
+            video.pause();
+            console.log('player pause');
         }
     </script>
 </body>
-
 </html>
