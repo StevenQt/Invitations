@@ -1,78 +1,53 @@
+<!DOCTYPE html>
 <html>
+
 <head>
-    <meta content="text/html; charset=utf-8" http-equiv="Content-Type">
-    <title>mpegts.js demo</title>
+    <meta charset=utf-8 />
+    <title>hls</title>
 </head>
+
 <body>
-    <div class="mainContainer">
-        <div>
-            <div id="mediaSourceURL" class="hidden">
-                <div class="url-input">
-                    <label for="msURL">MediaSource:</label>
-                    <input id="msURL" type="text" value="https://rtc-hz-dev.oss-cn-hangzhou.aliyuncs.com/records/collect/test.ts" />
-                </div>
-            </div>
-        </div>
-        <div class="video-container">
-            <div>
-                <video name="videoElement" class="centeredVideo" controls autoplay>
-                    Your browser is too old which doesn't support HTML5 video.
-                </video>
-            </div>
-        </div>
-        <div class="controls">
-            <button onclick="player_load()">Load</button>
-            <button onclick="player_start()">Start</button>
-            <button onclick="player_pause()">Pause</button>
-            <button onclick="player_destroy()">Destroy</button>
-        </div>
-    </div>
-    <script src="mpegts.js"></script>
+    <h1>hls.js Example Embed</h1>
+    <script src="https://cdn.jsdelivr.net/npm/hls.js@latest"></script>
+    <video id="video" class="centeredVideo" controls autoplay="false">
+        Your browser is too old which doesn't support HTML5 video.
+    </video>
     <script>
-        function player_load() {
-            var element = document.getElementsByName('videoElement')[0];
-            if (typeof player !== "undefined") {
-                if (player != null) {
-                    player.unload();
-                    player.detachMediaElement();
-                    player.destroy();
-                    player = null;
-                }
-            }
-            var url = document.getElementById('msURL').value;
-            console.log(url);
-            var mediaDataSource = {
-                url: url,
-                type: 'mse'
-            };
-            player = mpegts.createPlayer(mediaDataSource, {
-                enableWorker: true,
-                lazyLoadMaxDuration: 3 * 60,
-                seekType: 'range',
-                liveBufferLatencyChasing: false,
+        document.addEventListener('click', function () {
+            var video = document.getElementById('video');
+            video.play();
+            console.log('video play');
+        });
+        if (Hls.isSupported()) {
+            var video = document.getElementById('video');
+            var hls = new Hls();
+            hls.attachMedia(video);
+            hls.on(Hls.Events.MEDIA_ATTACHED, function () {
+                console.log('video and hls.js are now bound together');
+                hls.loadSource('https://rtc-hz-dev.oss-cn-hangzhou.aliyuncs.com/records/collect/test_0.m3u8');
+                hls.on(Hls.Events.MANIFEST_PARSED, function (event, data) {
+                    console.log(data.levels.length + ' quality level');
+                });
             });
-            player.attachMediaElement(element);
-            player.load();
-        }
-        function player_start() {
-            if (player != null) {
-               player.play();
-            }
-        }
-        function player_pause() {
-            if (player != null) {
-                player.pause();
-            }
-        }
-        function player_destroy() {
-            if (player != null) {
-                player.pause();
-                player.unload();
-                player.detachMediaElement();
-                player.destroy();
-                player = null;
-            }
+            hls.on(Hls.Events.ERROR, function (event, data) {
+                if (data.fatal) {
+                    switch (data.type) {
+                        case Hls.ErrorTypes.NETWORK_ERROR:
+                            console.log('network error encountered, try to recover');
+                            hls.startLoad();
+                            break;
+                        case Hls.ErrorTypes.MEDIA_ERROR:
+                            console.log('media error encountered, try to recover');
+                            hls.recoverMediaError();
+                            break;
+                        default:
+                            hls.destroy();
+                            break;
+                    }
+                }
+            });
         }
     </script>
 </body>
+
 </html>
